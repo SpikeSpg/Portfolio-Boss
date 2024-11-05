@@ -23,7 +23,7 @@
 			<a href="#" class="icon solid fa-home"><span>Home</span></a>
 			<a href="#about-me" class="icon solid fa-user"><span>About me</span></a>
 			<a href="#work" class="icon solid fa-folder"><span>Work</span></a>
-			<a href="#contact" class="icon solid fa-phone"><span>Contact</span></a>
+			<a href="#contact" class="icon solid fa-envelope"><span>Contact</span></a>
 		</nav>
 
 		<!-- Main -->
@@ -55,31 +55,33 @@
 					<h5>Personal Information</h5>
 					<p id="personal-info" style="margin-top: 7px;"></p>
 
-					<h5>Images</h5>
-					<div class="row" style="margin-top: 7px;">
-						<div class="col-6 col-12-medium col-12-small">
-							<a href="#" class="image fit"><img src="images/hiking.jpg" alt=""></a>
-							<center>
-								<figcaption>go hiking with a friend.</figcaption>
-							</center>
-						</div>
-						<div class="col-6 col-12-medium col-12-small">
-							<a href="#" class="image fit"><img src="images/cat2.jpg" alt=""></a>
-							<center>
-								<figcaption>my friend's cat.</figcaption>
-							</center>
-						</div>
-						<div class="col-6 col-12-medium col-12-small">
-							<a href="#" class="image fit"><img src="images/football.jpg" alt=""></a>
-							<center>
-								<figcaption>me playing football.</figcaption>
-							</center>
-						</div>
-						<div class="col-6 col-12-medium col-12-small">
-							<a href="#" class="image fit"><img src="images/cat1.jpg" alt=""></a>
-							<center>
-								<figcaption>my female cat.</figcaption>
-							</center>
+					<div style="display: none;" id="generalImg">
+						<h5>Images</h5>
+						<div class="row" style="margin-top: 7px;">
+							<div class="col-6 col-12-medium col-12-small">
+								<a href="#" class="image fit"><img src="images/hiking.jpg" alt=""></a>
+								<center>
+									<figcaption>go hiking with a friend.</figcaption>
+								</center>
+							</div>
+							<div class="col-6 col-12-medium col-12-small">
+								<a href="#" class="image fit"><img src="images/cat2.jpg" alt=""></a>
+								<center>
+									<figcaption>my friend's cat.</figcaption>
+								</center>
+							</div>
+							<div class="col-6 col-12-medium col-12-small">
+								<a href="#" class="image fit"><img src="images/football.jpg" alt=""></a>
+								<center>
+									<figcaption>me playing football.</figcaption>
+								</center>
+							</div>
+							<div class="col-6 col-12-medium col-12-small">
+								<a href="#" class="image fit"><img src="images/cat1.jpg" alt=""></a>
+								<center>
+									<figcaption>my female cat.</figcaption>
+								</center>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -90,13 +92,9 @@
 				<header>
 					<h2>Work</h2>
 				</header>
-				<p>
-					I have gained valuable experience working at various organizations, including NT Udonthani and Ship
-					Expert Technology. In these roles, I managed the procurement process, which involved writing clause
-					documents. Additionally, I provided IT support and was responsible for installing and configuring
-					network systems.
+				<p id="work-info">
 				</p>
-				<section>
+				<section style="display: none;" id="workImg">
 					<h5>Images</h5>
 					<div class="row" style="margin-top: 7px;">
 						<div class="col-4 col-6-medium col-12-small">
@@ -161,15 +159,13 @@
 							</a>
 						</li>
 						<li>
-							<a href="mailto:thanakonp6@gmail.com"
-								style="text-decoration: none; color: #333;">
+							<a href="mailto:thanakonp6@gmail.com" style="text-decoration: none; color: #333;">
 								<i class="fas fa-envelope"> Gmail</i>
 							</a>
 						</li>
 						<li>
-							<a href="tel:+660942803364"
-								style="text-decoration: none; color: #333;">
-								<i class="fas fa-phone"> Phone</i>
+							<a href="tel:+660942803364" style="text-decoration: none; color: #333;">
+								<i class="fas fa-phone"> <span>Phone</span></i>
 							</a>
 						</li>
 					</ul>
@@ -197,34 +193,69 @@
 	<script src="assets/js/main.js"></script>
 
 	<script>
-		// Initialize Typed.js for personal information
+		// Show hidden images
+		function showImages(id) {
+			document.getElementById(id).style.display = "block";
+		}
+
 		let typed;
 
-		function typingEffect() {
+		// Initialize Typed.js
+		function typingPersonal() {
 			if (typed) {
 				typed.destroy();
 			}
 
 			var options = {
-				strings: [
-					"Hello! My name is Thanakon Phukhao, but you can call me Boss. I am from Nongwuaso, Udonthani. I was born on February 24, 2001, which makes me 23 years old. I have a passion for football and cycling. Additionally, I have a pet cat and a dog."
-				],
-				typeSpeed: 26,
+				strings: ["Hello! My name is Thanakon Phukhao, but you can call me Boss. I am from Nongwuaso, Udonthani. I was born on February 24, 2001, which makes me 23 years old. I have a passion for football and cycling. Additionally, I have a pet cat and a dog."],
+				typeSpeed: 22,
 				loop: false,
-				showCursor: false
+				showCursor: false,
+				onComplete: function () {
+					showImages("generalImg");
+				}
 			};
 
 			typed = new Typed("#personal-info", options);
 		}
 
-		// Only when the #about-me being apply
-		window.addEventListener('hashchange', function () {
-			typingEffect();
-		});
+		function typingWork() {
+			if (typed) {
+				typed.destroy();
+			}
 
-		if (window.location.hash === '#about-me') {
-			typingEffect();
+			var options = {
+				strings: ["I have gained valuable experience working at various organizations, including NT Udonthani and Ship Expert Technology. In these roles, I managed the procurement process, which involved writing clause documents. Additionally, I provided IT support and was responsible for installing and configuring network systems."],
+				typeSpeed: 22,
+				loop: false,
+				showCursor: false,
+				onComplete: function () {
+					showImages("workImg");
+				}
+			};
+
+			typed = new Typed("#work-info", options);
 		}
+
+		// Typing effect on personal info and working info
+		function handleHashChange() {
+			if (window.location.hash === '#about-me') {
+				typingPersonal();
+			}
+			else if (window.location.hash === '#work') {
+				typingWork();
+			}
+		}
+
+		// Listen for hashchange event
+		window.addEventListener('hashchange', handleHashChange);
+
+		// Trigger hashchange event on initial page load
+		window.addEventListener('load', function () {
+			typingPersonal();
+			typingWork();
+			handleHashChange();
+		});
 	</script>
 
 </body>
